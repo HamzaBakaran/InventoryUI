@@ -1,5 +1,7 @@
-import {Product} from './utils/types';
-
+import {Product, UserType} from './utils/types';
+import {Dashboard} from './utils/types';
+//import {Order} from './utils/types';
+//import {ProductItem} from './utils/types';
 export const productsList: Product[] = [
     {
       id: "6575fefdf1ce411dbd2e85b5",
@@ -133,3 +135,95 @@ export const productsList: Product[] = [
           }
     // ... other products ...
   ]
+  export const dashboardItems: Dashboard[] = [
+    { 
+      title: "Total Products", 
+      total: 100,
+      color: "success" 
+    },
+    { 
+      title: "Revenue",
+      total: 50000,
+      color: "warning"
+     },
+    { 
+      title: "Users",
+      total: 1500,
+      color: "primary"
+     },
+     
+  ]
+  export const usersList: UserType[] = [ 
+    {
+    id: "6575fe15f1ce411dbd2e85b4",
+    firstName: "Hamza",
+    lastName: "Bakaran",
+    userType: "ADMIN",
+    email: "hamzabakaran@gmail.com",
+    userName: "h.b"
+  },
+  {
+    id: "6586fca855586d1c0d855b27",
+    firstName: "t",
+    lastName: "t",
+    userType: "ADMIN",
+    email: "t",
+    userName: "t"
+  },
+  {
+    id: "6575fe15f1ce411dbd2e85b4",
+    firstName: "Hamza",
+    lastName: "Bakaran",
+    userType: "ADMIN",
+    email: "hamzabakaran@gmail.com",
+    userName: "h.b"
+  },
+  {
+    id: "6575fe15f1ce411dbd2e85b4",
+    firstName: "Hamza",
+    lastName: "Bakaran",
+    userType: "ADMIN",
+    email: "hamzabakaran@gmail.com",
+    userName: "h.b"
+  },
+  {
+    id: "6575fe15f1ce411dbd2e85b4",
+    firstName: "Hamza",
+    lastName: "Bakaran",
+    userType: "ADMIN",
+    email: "hamzabakaran@gmail.com",
+    userName: "h.b"
+  },
+  {
+    id: "6575fe15f1ce411dbd2e85b4",
+    firstName: "Hamza",
+    lastName: "Bakaran",
+    userType: "ADMIN",
+    email: "hamzabakaran@gmail.com",
+    userName: "h.b"
+  }
+  ]
+  /*
+  export const orderItems: Order[] = [
+  
+    {
+      id: "65760418f1ce411dbd2e85c6",
+      orderDate: "Sun Dec 10 19:31:52 CET 2023",
+      products: [
+        {
+          productName: "ORANGE GARMIN FENIX 5 / 6 / 7 / PRO / EPIX 2 NARUKVICA 22mm",
+          quantity: 1,
+          price: 20,
+          subtotal: 20
+        },
+        {
+          productName: "GREEN GARMIN FENIX 5 / 6 / 7 / PRO / EPIX 2 NARUKVICA 22mm",
+          quantity: 1,
+          price: 20,
+          subtotal: 20
+        }
+      ],
+      total: 40
+    },
+  ]
+  */

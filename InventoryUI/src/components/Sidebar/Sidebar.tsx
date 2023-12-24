@@ -1,4 +1,4 @@
-import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
   return (
@@ -8,70 +8,32 @@ const Sidebar = () => {
       </a>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item">
-          <a href="#" className="nav-link active" aria-current="page">
-            Home
-          </a>
+      <li className="nav-item">
+        <Link className="nav-link text-white" to="/dashboard">Dashboard</Link>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link text-white">
-            Dashboard
-          </a>
+        <Link className="nav-link text-white" to="/user">Users</Link>
+        </li>
+
+        <li className="nav-item">
+        <Link className="nav-link text-white" to="/order">Orders</Link>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link text-white">
-            Orders
-          </a>
+        <Link className="nav-link text-white" to="/home">Products</Link>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link text-white">
-            Products
-          </a>
-        </li>
-        <li className="nav-item">
-          <a href="#" className="nav-link text-white">
-            Customers
-          </a>
+          
+          <Link className="nav-link text-white" to="/login">Login</Link>
+            
+          
         </li>
       </ul>
       <hr />
-      <div className="dropdown">
-        <a
-          href="#"
-          className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-          id="dropdownUser1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <span className="me-2">User Avatar</span>
-          <strong>mdo</strong>
-        </a>
-        <ul className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-          <li>
-            <a className="dropdown-item" href="#">
-              New project...
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Settings
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Profile
-            </a>
-          </li>
-          <li>
-            <hr className="dropdown-divider" />
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Sign out
-            </a>
-          </li>
-        </ul>
-      </div>
+      <div className="d-flex align-items-center">
+  <button className="btn btn-danger text-white" >
+    Log Out
+  </button>
+</div>
     </div>
   
 

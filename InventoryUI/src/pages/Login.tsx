@@ -2,7 +2,9 @@ type Props = {}
 
 const Login = (props: Props) => {
   return (
-    <div className="col-12 col-md-3 m-2">
+<div className="container">
+  <div className="row">
+    <div className="col-12 col-md-6 mx-auto">
       <div className="card p-2">
         <form>
           <div className="mb-3">
@@ -22,6 +24,8 @@ const Login = (props: Props) => {
         </form>
       </div>
     </div>
+  </div>
+</div>
   )
 }
 

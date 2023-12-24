@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom"
 import Sidebar from './components/Sidebar'
-import { Home, Login } from './pages'
+import { Home, Login,NotFound,User } from './pages'
+import Dashboard from "./pages/Dashboard"
+//import Order from "./pages/Order"
 
 
 function App() {
@@ -10,9 +12,12 @@ function App() {
     <>
     <Sidebar/>
     <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/user" element={<User />} />
+        <Route path="*" element={<NotFound />} />
     </Routes>
     </>
   )
