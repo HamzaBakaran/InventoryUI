@@ -1,11 +1,11 @@
 export type Product = {
-    id: string;
+    id?:string;
     name: string;
     productType: string;
     costPrice: number;
     sellingPrice: number;
     url: string;
-    addedDate: string; // This should ideally be a Date object, but you may parse it in your code
+    addedDate?: any; // This should ideally be a Date object, but you may parse it in your code
     quantity: number;
   }
   export type Dashboard = {
@@ -31,5 +31,13 @@ export type Product = {
     userType: 'ADMIN' | 'USER' | 'GUEST'; // Adjust the possible user types as needed
     email: string;
     userName: string;
+  };
+  export type Order = {
+    id?:string;
+    productIds: {
+      product_id: string;
+      quantity: number;
+    }[];
+    
   };
  

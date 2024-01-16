@@ -1,10 +1,34 @@
 import { Product } from "../../utils/types"
+import useDeleteProduct from '../../hooks/useDeleteProduct';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
   product: Product
 }
 
 const ProductCard = ({product}: Props) => {
+
+  const deleteProduct = useDeleteProduct();
+
+  
+  const handleDelete = async (productId: string | undefined) => {
+    // Ensure productId is not undefined
+    if (!productId) {
+      toast.error('Invalid productId:');
+      return;
+    }
+  
+    try {
+      await deleteProduct.mutateAsync(productId);
+      toast.success('Product deleted successfully');
+    } catch (error) {
+      const errorMessage = (error as Error).toString(); // Type assertion
+      toast.error(`Error fetching products: ${errorMessage}`);
+    }
+  };
+
+
   return (
 <div className="card">
   <div className="card-header">
@@ -38,6 +62,7 @@ const ProductCard = ({product}: Props) => {
         <button
           type="button"
           className="btn btn-danger"
+          onClick={() => handleDelete(product.id)}
           
         >
           Delete

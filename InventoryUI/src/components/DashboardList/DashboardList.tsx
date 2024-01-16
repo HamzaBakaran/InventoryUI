@@ -1,22 +1,36 @@
-import { dashboardItems } from "../../constants"
-import React, { useState, ChangeEvent } from 'react';
+
 import DashboardCard from '../DashboardCard';
+import useDashboardProductCount from '../../hooks/useDashboardProductCount';
+import useDashboardOrderCount from '../../hooks/useDashboardOrdersCount';
 
-type Props = {};
+const DashboardList = () => {
+  const { data: productCount, error: productError, isLoading: productLoading } = useDashboardProductCount();
+  const { data: orderCount, error: orderError, isLoading: orderLoading } = useDashboardOrderCount();
 
-const DashboardList = (props:Props) => {
-const [dashboard, setDashboard] = useState(dashboardItems);
 
   return (
     <div className="row">
-        {dashboard.map((dashboard, i) => (
-            <div className="col-md-4 mb-3" key={i}>
-            {/* Adjust the col-md-4 to the desired column size */}
-            <DashboardCard dashboard={dashboard} />
-            </div>
-        ))}
+      <div className="col-md-4 mb-3">
+        <div className="mx-3">
+          {productCount && 'totalProducts' in productCount && (
+            <DashboardCard title="Total Products" color="success" total={productCount.totalProducts} />
+          )}
+        </div>
+      </div>
+      <div className="col-md-4 mb-3">
+        <div className="mx-3">
+          {orderCount && 'totalOrders' in orderCount && ( 
+            <DashboardCard title="Total Orders" color="danger" total={orderCount.totalOrders} />
+          )}
+        </div>
+      </div>
+      <div className="col-md-4 mb-3">
+        <div className="mx-3">
+          <DashboardCard title="Users" color="primary" total={200} />
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default DashboardList
+export default DashboardList;

@@ -1,8 +1,11 @@
 import { Route, Routes } from "react-router-dom"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from './components/Sidebar'
-import { Home, Login,NotFound,User } from './pages'
+import { Home, Login,NotFound,Order,User } from './pages'
 import Dashboard from "./pages/Dashboard"
-//import Order from "./pages/Order"
+
+
 
 
 function App() {
@@ -17,8 +20,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/user" element={<User />} />
+        <Route path="/order" element={<Order />} />
         <Route path="*" element={<NotFound />} />
     </Routes>
+    <ToastContainer />
     </>
   )
 }

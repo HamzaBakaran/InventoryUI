@@ -1,12 +1,9 @@
-/*
-import React from 'react'
-import OrderTable from '../components/OrderTable'
 
-const Order = () => {
-  return (
-    <OrderTable />
-  )
-}
+import OrderDetails from '../components/OrderDetails';
+import { orderItems } from '../constants';
 
-export default Order
-*/
+const OrdersPage = () => {
+  return <OrderDetails orders={orderItems} />;
+};
+
+export default OrdersPage;
