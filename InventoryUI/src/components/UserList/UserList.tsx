@@ -1,18 +1,23 @@
 import React, { useState, ChangeEvent } from 'react';
-import { usersList } from '../../constants'; // Assuming you have a userList constant
-import UserCard from '../UserCard'; // Adjust the import based on your project structure
+import UserCard from '../UserCard';
+import useUsers from '../../hooks/useUsers';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {};
 
 const UserList = (props: Props) => {
-  const [users, setUsers] = useState(usersList);
+  const { data: users, error, isLoading, isError, refetch } = useUsers();
 
-  const search = (e: ChangeEvent<HTMLInputElement>) => {
-    const filteredUsers = usersList.filter(user =>
-      user.userName.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setUsers(filteredUsers);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
   };
+  
+  const filteredUsers = (users ?? []).filter((user) =>
+    user?.userName?.toLowerCase()?.includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
@@ -22,27 +27,36 @@ const UserList = (props: Props) => {
             <input
               type="text"
               className="form-control"
-              onChange={search}
+              onChange={handleSearch}
+              value={searchQuery}
               placeholder="Search for a user..."
             />
           </div>
         </div>
+        {isLoading && (
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        )}
 
-        {users.length > 0 ? (
+        {!isLoading && (
           <div className="row">
-            {users.map((user, i) => (
+            {filteredUsers?.map((user, i) => (
               <div className="col-md-4 mb-3" key={i}>
-                {/* Adjust the col-md-4 to the desired column size */}
                 <UserCard user={user} />
               </div>
             ))}
           </div>
-        ) : (
+        )}
+
+        {!isLoading && filteredUsers?.length === 0 && (
           <div className="row mb-3">
             <p>No users found.</p>
           </div>
         )}
       </div>
+
+      <ToastContainer />
     </>
   );
 };

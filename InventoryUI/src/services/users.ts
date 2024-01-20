@@ -2,7 +2,7 @@ import appAxios from "./appAxios";
 import { UserType } from "../utils/types";
 
 const getUsers = async (): Promise<UserType[]> => {
-    return appAxios.get(`/products/`).then(
+    return appAxios.get(`/users/`).then(
         (response) => {
             const data = response.data;
             console.log(data);

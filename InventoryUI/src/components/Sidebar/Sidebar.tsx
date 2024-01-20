@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store';
-// import { logout } from '../../store/authSlice';
+import { logout } from '../../store/authSlice';
 
 const Sidebar = () => {
   const { userToken } = useSelector((state: RootState) => state.auth);
+  //const userToken = localStorage.getItem('userToken'); 
+  const dispatch = useDispatch()
 
   return (
     <nav className="navbar navbar-dark bg-dark">
@@ -49,7 +51,7 @@ const Sidebar = () => {
             </>
           ) : (
             <div className="d-flex align-items-center">
-              <button className="btn btn-danger text-white">Log Out</button>
+              <button className="btn btn-danger text-white" onClick={()=> dispatch(logout())}>Log Out</button>
             </div>
           )}
         </ul>

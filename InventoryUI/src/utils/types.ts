@@ -38,6 +38,14 @@ export type Product = {
       product_id: string;
       quantity: number;
     }[];
+  }
+
+  export type OrderProduct = {
+      product_id: string;
+      quantity: number;
+    }
     
-  };
+   
+    
+  
  

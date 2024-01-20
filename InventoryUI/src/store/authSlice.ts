@@ -12,7 +12,7 @@ const userToken = localStorage.getItem('userToken')
 const initialState = {
     loading: false,
     userInfo: null, // for user the object
-    userToken: null, // for storing the JWT
+    userToken, // for storing the JWT
     error: null,
     success: false, // for monitoring the registration process.
 }
@@ -21,7 +21,16 @@ const initialState = {
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        logout: (state) => {
+            localStorage.removeItem('userToken') // deletes token from storage
+            state.loading = false
+            state.userInfo = null
+            state.userToken = null
+            state.error = null
+        }
+
+    },
     extraReducers: (builder) => {
         // Register user
         builder.addCase(registerUser.pending, (state) => {
@@ -97,3 +106,4 @@ export const registerUser = createAsyncThunk(
 
 
 export default authSlice.reducer
+export const { logout } = authSlice.actions

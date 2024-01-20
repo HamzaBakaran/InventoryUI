@@ -1,15 +1,17 @@
-import { Route, Routes } from "react-router-dom"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Route, Routes } from "react-router-dom"
 import Sidebar from './components/Sidebar'
 import { Home, Login,NotFound,Order,User,Registration } from './pages'
 import Dashboard from "./pages/Dashboard"
+import parseJwt from './utils/parseJwt';
 
 
 
 
 
 function App() {
+  console.log(parseJwt(localStorage.getItem('userToken')!));
 
 
   return (

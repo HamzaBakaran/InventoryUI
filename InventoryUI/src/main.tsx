@@ -6,6 +6,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import store from './store'
+import parseJwt from './utils/parseJwt';
+
+console.log(parseJwt(localStorage.getItem('userToken')!));
 
 
 const queryClient = new QueryClient({

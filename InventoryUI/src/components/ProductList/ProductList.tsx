@@ -1,35 +1,43 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import ProductCard from '../ProductCard';
-import { Product } from '../../utils/types';
-import { ProductService } from '../../services';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import Modal from 'react-modal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Product } from '../../utils/types';
 import useProduct from '../../hooks/useProduct';
 import useCreateProduct from '../../hooks/useCreateProduct';
-
+import ProductCard from '../ProductCard';
+import * as yup from 'yup';
 
 type Props = {};
 
+const productTypeValues: Array<Product['productType']> = ['ACCESORIES', 'WATCH_ACESSORIES'];
+
+const productSchema = yup.object({
+  name: yup.string().required(),
+  productType: yup.mixed<Product['productType']>().oneOf(productTypeValues).required(),
+  costPrice: yup.number().required(),
+  sellingPrice: yup.number().required(),
+  url: yup.string().url().required(),
+  quantity: yup.number().required().positive().integer(),
+});
+
 const ProductList = (props: Props) => {
-  
-  const {data: products,error, isLoading,isError,refetch} = useProduct()
+  const { data: products, error, isLoading, isError, refetch } = useProduct();
 
   const [searchQuery, setSearchQuery] = useState<string>('');
-
-  const createProduct = useCreateProduct();
-
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Product>({
     name: '',
-    productType: '',
+    productType: 'ACCESORIES',
     costPrice: 0,
     sellingPrice: 0,
     url: '',
     quantity: 0,
   });
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  const createProduct = useCreateProduct();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -37,27 +45,35 @@ const ProductList = (props: Props) => {
     }));
   };
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
+      await productSchema.validate(formData, { abortEarly: false });
       await createProduct.mutateAsync(formData);
       toast.success('Product added successfully!');
-      refetch(); // Refetch the product list after adding a new product
-    } catch (error) {
-      toast.error(`Error adding product: ${error}`);
+      refetch();
+    } catch (validationError) {
+      if (validationError instanceof yup.ValidationError) {
+        validationError.inner.forEach((error) => {
+          toast.error(error.message);
+        });
+      } else {
+        toast.error(`Error adding product: ${validationError}`);
+      }
     }
 
-    closeModal();
-  };
+    setFormData({
+      name: '',
+      productType: 'ACCESORIES',
+      costPrice: 0,
+      sellingPrice: 0,
+      url: '',
+      quantity: 0,
+    });
 
+    setIsModalOpen(false);
+  };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -66,29 +82,6 @@ const ProductList = (props: Props) => {
   const filteredProducts = products?.filter((product) =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  const handleCreateProduct = async () => {
-    try {
-      // You can modify this with your own logic to get new product data
-      const newProductData: Product = {
-        name: 'Apple Watch Series 6',
-        productType: 'WATCH_ACESSORIES',
-        costPrice: 100,
-        sellingPrice: 150,
-        url: 'https://www.apple.com/shop/buy-watch/apple-watch',
-        quantity: 5,
-        //addedDate: new Date()
-
-        
-      };
-
-      await createProduct.mutateAsync(newProductData);
-      toast.success('Product created successfully');
-    } catch (error) {
-      const errorMessage = (error as Error).toString(); // Type assertion
-      toast.error(`Error fetching products: ${errorMessage}`);
-    }
-  };
 
   return (
     <>
@@ -104,65 +97,96 @@ const ProductList = (props: Props) => {
             />
           </div>
         </div>
-        {isLoading &&
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        }
-        <button onClick={handleCreateProduct}>Create Product</button>
+
         <button
-              type="button"
-              className="btn btn-primary"
-              onClick={openModal}
-            >
+          type="button"
+          className="btn btn-primary"
+          onClick={() => setIsModalOpen(true)}
+        >
+          Add Product
+        </button>
+
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          contentLabel="Add Product Modal"
+        >
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label">Product Name</label>
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Product Type</label>
+              <select
+                className="form-select"
+                name="productType"
+                value={formData.productType}
+                onChange={handleInputChange}
+              >
+                <option value="ACCESORIES">Accessories</option>
+                <option value="WATCH_ACESSORIES">WATCH_ACESSORIES</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Cost Price</label>
+              <input
+                type="number"
+                className="form-control"
+                name="costPrice"
+                value={formData.costPrice}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Selling Price</label>
+              <input
+                type="number"
+                className="form-control"
+                name="sellingPrice"
+                value={formData.sellingPrice}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">URL</label>
+              <input
+                type="text"
+                className="form-control"
+                name="url"
+                value={formData.url}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Quantity</label>
+              <input
+                type="number"
+                className="form-control"
+                name="quantity"
+                value={formData.quantity}
+                onChange={handleInputChange}
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
               Add Product
             </button>
-       
-       {!isLoading && (
+          </form>
+        </Modal>
+
+        {!isLoading && (
           <div className="row">
             {filteredProducts?.map((product, i) => (
               <div className="col-md-4 mb-3" key={i}>
                 <ProductCard product={product} />
               </div>
             ))}
-          </div>
-        )}
-                 {/* Bootstrap Modal for adding a new product */}
-        {isModalOpen && (
-          <div className="modal-overlay">
-            <div className="modal">
-              <button type="button" onClick={closeModal}>
-                Close
-              </button>
-              {/* Form for adding a new product */}
-              <form onSubmit={handleSubmit}>
-                {/* Include input fields for each property */}
-                <div className="mb-3">
-                  <label className="form-label">Product Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Product Type</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="productType"
-                    value={formData.productType}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                {/* Repeat for other fields */}
-                <button type="submit" className="btn btn-primary">
-                  Add Product
-                </button>
-              </form>
-            </div>
           </div>
         )}
 
@@ -172,11 +196,10 @@ const ProductList = (props: Props) => {
           </div>
         )}
       </div>
-          
+
       <ToastContainer />
-          
     </>
   );
-}
+};
 
 export default ProductList;

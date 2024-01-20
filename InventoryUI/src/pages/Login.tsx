@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { toast } from 'react-toastify';
 
+
 type Props = {}
 
 export type LoginFormData = {
@@ -48,10 +49,13 @@ useEffect(() => {
 }, [navigate, userToken])
 
 
-if(error){
-   const errorMessage = (error as Error).toString(); // Type assertion
-     toast.error(`Error registrating order: ${errorMessage}`);
+if (error) {
+  const errorMessage = (error as Error).toString(); // Type assertion
+  if (errorMessage) {
+    toast.error(`Error registering order: ${errorMessage}`);
+  }
 }
+
 
   return (
 <>
