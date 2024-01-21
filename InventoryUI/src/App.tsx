@@ -20,7 +20,7 @@ function App() {
     <>
     <Navbar/>
     <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} /> {/* Home page/product page */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
