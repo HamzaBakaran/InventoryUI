@@ -1,3 +1,4 @@
+import React from 'react';
 import { Product } from "../../utils/types";
 import useDeleteProduct from '../../hooks/useDeleteProduct';
 import { toast } from 'react-toastify';
@@ -27,7 +28,7 @@ const ProductCard = ({ product }: Props) => {
       toast.success('Product deleted successfully');
     } catch (error) {
       const errorMessage = (error as Error).toString();
-      toast.error(`Error fetching products: ${errorMessage}`);
+      toast.error(`Error deleting product: ${errorMessage}`);
     }
   };
 
@@ -52,22 +53,17 @@ const ProductCard = ({ product }: Props) => {
             Go to Product
           </a>
 
-          {(isAdmin  && (
+          {isAdmin && (
             <>
-              <button type="button" className="btn btn-success mx-2">
-                Edit
+  
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => handleDelete(product.id)}
+              >
+                Delete
               </button>
-              
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(product.id)}
-                >
-                  Delete
-                </button>
-              
             </>
-          )
           )}
         </div>
       </div>

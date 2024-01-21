@@ -64,13 +64,7 @@ const OrderCard = ({ order }: props) => {
           </ul>
           <h5 className="card-title mt-3">Total: ${order.total}</h5>
           <div className="d-flex justify-content-between mt-3">
-            <button
-              type="button"
-              className="btn btn-success"
-              // Add your edit function here
-            >
-              Edit
-            </button>
+
             {isAdmin && (
               <button
                 type="button"

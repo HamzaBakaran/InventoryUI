@@ -9,27 +9,22 @@ const DashboardList = () => {
 
 
   return (
-    <div className="row">
-      <div className="col-md-4 mb-3">
-        <div className="mx-3">
-          {productCount && 'totalProducts' in productCount && (
-            <DashboardCard title="Total Products" color="success" total={productCount.totalProducts} />
-          )}
-        </div>
-      </div>
-      <div className="col-md-4 mb-3">
-        <div className="mx-3">
-          {orderCount && 'totalOrders' in orderCount && ( 
-            <DashboardCard title="Total Orders" color="danger" total={orderCount.totalOrders} />
-          )}
-        </div>
-      </div>
-      <div className="col-md-4 mb-3">
-        <div className="mx-3">
-          <DashboardCard title="Users" color="primary" total={200} />
-        </div>
-      </div>
+<div className="row">
+  <div className="col-md-4 mb-3 mx-auto">
+    <div className="mx-3">
+      {productCount && 'totalProducts' in productCount && (
+        <DashboardCard title="Total Products" color="success" total={productCount.totalProducts} />
+      )}
     </div>
+  </div>
+  <div className="col-md-4 mb-3 mx-auto">
+    <div className="mx-3">
+      {orderCount && 'totalOrders' in orderCount && ( 
+        <DashboardCard title="Total Orders" color="danger" total={orderCount.totalOrders} />
+      )}
+    </div>
+  </div>
+</div>
   );
 };
 

@@ -13,7 +13,7 @@ const getUsers = async (): Promise<UserType[]> => {
  
 }
 const addUser = async (user: UserType): Promise<UserType> => {
-    return appAxios.post(`/products/register`, user).then(
+    return appAxios.post(`/users/register`, user).then(
         (response) => {
             const data = response.data;
             console.log(data);
