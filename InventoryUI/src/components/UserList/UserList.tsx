@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import  { useState, ChangeEvent } from 'react';
 import UserCard from '../UserCard';
 import useUsers from '../../hooks/useUsers';
 import { toast, ToastContainer } from 'react-toastify';
@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
 import { registerUser } from "../../store/authSlice";
 
-type Props = {};
+
 
 export type RegisterFormData = {
   firstName: string;
@@ -33,8 +33,8 @@ const schema = yup
   })
   .required();
 
-const UserList = (props: Props) => {
-  const { data: users, error, isLoading, isError, refetch } = useUsers();
+const UserList = () => {
+  const { data: users, isLoading} = useUsers();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormData>({

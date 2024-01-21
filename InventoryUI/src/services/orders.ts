@@ -1,7 +1,6 @@
 import appAxios from "./appAxios";
 import { Order, OrderType } from "../utils/types";
-import { useSelector } from "react-redux";
-import { RootState } from '../store';
+
 
 const getOrders = async (): Promise<OrderType[]> => {
     return appAxios.get(`/orders/getAllCustom`).then(

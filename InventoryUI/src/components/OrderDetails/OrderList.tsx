@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
-import { Order, OrderProduct, Product } from '../../utils/types';
+import { Order, OrderProduct} from '../../utils/types';
 import OrderCard from '../OrderCard/OrderCard';
 import useOrders from '../../hooks/useOrders';
 import { toast } from 'react-toastify';
@@ -8,7 +8,7 @@ import useCreateOrder from '../../hooks/useCreateOrder';
 import useProducts from '../../hooks/useProduct';
 import * as yup from 'yup';
 
-type Props = {};
+
 
 const orderSchema = yup.object({
   productIds: yup.array().of(
@@ -19,10 +19,10 @@ const orderSchema = yup.object({
   ),
 });
 
-const OrderList = (props: Props) => {
-  const { data: orders, error, isLoading, isError, refetch } = useOrders();
+const OrderList = () => {
+  const { data: orders, isLoading, refetch } = useOrders();
   const createOrder = useCreateOrder();
-  const { data: productsData, error: productsError, isLoading: productsLoading } = useProducts();
+  const { data: productsData,  isLoading: productsLoading } = useProducts();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState<Order>({

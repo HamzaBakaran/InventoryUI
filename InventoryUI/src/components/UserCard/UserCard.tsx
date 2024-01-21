@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { UserType } from '../../utils/types';
 import useDeleteUser from '../../hooks/useDeleteUser';
 import { toast } from 'react-toastify';

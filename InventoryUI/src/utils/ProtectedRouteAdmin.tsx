@@ -1,8 +1,8 @@
 // ProtectedRouteAdmin.js
 
-import { useSelector } from 'react-redux';
-import { NavLink, Outlet } from 'react-router-dom';
-import { RootState } from '../store';
+
+import {  Outlet } from 'react-router-dom';
+
 import parseJwt from './parseJwt'; // Import the parseJwt function
 
 

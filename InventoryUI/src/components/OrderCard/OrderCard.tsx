@@ -1,6 +1,6 @@
-import { OrderType, Product } from '../../utils/types';
+import { OrderType} from '../../utils/types';
 import useDeleteOrder from '../../hooks/useDeleteOrder';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import parseJwt from '../../utils/parseJwt';
 

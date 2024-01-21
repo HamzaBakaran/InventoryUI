@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import {  useMutation, useQueryClient } from 'react-query';
 import { ProductService } from '../services';
 import { Product } from '../utils/types';
 

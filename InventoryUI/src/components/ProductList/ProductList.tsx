@@ -8,7 +8,7 @@ import useCreateProduct from '../../hooks/useCreateProduct';
 import ProductCard from '../ProductCard';
 import * as yup from 'yup';
 
-type Props = {};
+
 
 const productTypeValues: Array<Product['productType']> = ['ACCESORIES', 'WATCH_ACESSORIES'];
 
@@ -21,8 +21,8 @@ const productSchema = yup.object({
   quantity: yup.number().required().positive().integer(),
 });
 
-const ProductList = (props: Props) => {
-  const { data: products, error, isLoading, isError, refetch } = useProduct();
+const ProductList = () => {
+  const { data: products,  isLoading,  refetch } = useProduct();
 
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [formData, setFormData] = useState<Product>({

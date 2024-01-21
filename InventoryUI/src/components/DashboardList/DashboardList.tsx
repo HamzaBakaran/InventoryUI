@@ -4,8 +4,8 @@ import useDashboardProductCount from '../../hooks/useDashboardProductCount';
 import useDashboardOrderCount from '../../hooks/useDashboardOrdersCount';
 
 const DashboardList = () => {
-  const { data: productCount, error: productError, isLoading: productLoading } = useDashboardProductCount();
-  const { data: orderCount, error: orderError, isLoading: orderLoading } = useDashboardOrderCount();
+  const { data: productCount } = useDashboardProductCount();
+  const { data: orderCount } = useDashboardOrderCount();
 
 
   return (

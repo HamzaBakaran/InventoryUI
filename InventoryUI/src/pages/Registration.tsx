@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { toast } from 'react-toastify';
 
-type Props = {}
+
 
 export type RegisterFormData = {
     firstName: string;
@@ -30,7 +30,7 @@ export type RegisterFormData = {
    .required()
 
 
-const Registration = (props: Props) => {
+const Registration = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormData>({
         resolver: yupResolver(schema)

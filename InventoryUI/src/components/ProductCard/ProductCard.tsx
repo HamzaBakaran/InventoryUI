@@ -1,10 +1,9 @@
-import React from 'react';
+
 import { Product } from "../../utils/types";
 import useDeleteProduct from '../../hooks/useDeleteProduct';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+
 import parseJwt from '../../utils/parseJwt'; // Import the parseJwt function
 
 type Props = {
