@@ -1,10 +1,11 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes } from "react-router-dom"
-import Sidebar from './components/Sidebar'
+import Navbar from './components/Navbar/Navbar';
 import { Home, Login,NotFound,Order,User,Registration } from './pages'
 import Dashboard from "./pages/Dashboard"
 import parseJwt from './utils/parseJwt';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 
 
@@ -16,15 +17,18 @@ function App() {
 
   return (
     <>
-    <Sidebar/>
+    <Navbar/>
     <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
+        <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/user" element={<User />} />
         <Route path="/order" element={<Order />} />
-        <Route path="/register" element={<Registration />} />
+        </Route>
+        
         <Route path="*" element={<NotFound />} />
     </Routes>
     <ToastContainer />

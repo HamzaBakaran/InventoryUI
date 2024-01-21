@@ -24,7 +24,7 @@ const addUser = async (user: UserType): Promise<UserType> => {
  
 }
 const updateUser = async (user: UserType): Promise<UserType> => {
-    return appAxios.put(`/products/${user.id}`, user).then(
+    return appAxios.put(`/users/${user.id}`, user).then(
         (response) => {
             const data = response.data;
             console.log(data);
@@ -35,7 +35,7 @@ const updateUser = async (user: UserType): Promise<UserType> => {
 
 }
 const deleteUser = async (id: string): Promise<UserType> => {
-    return appAxios.delete(`/products/${id}`).then(
+    return appAxios.delete(`/users/${id}`).then(
         (response) => {
             const data = response.data;
             console.log(data);

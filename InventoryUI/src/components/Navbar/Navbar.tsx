@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../../store';
 import { logout } from '../../store/authSlice';
 
-const Sidebar = () => {
+const Navbar = () => {
   const { userToken } = useSelector((state: RootState) => state.auth);
-  //const userToken = localStorage.getItem('userToken'); 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <nav className="navbar navbar-dark bg-dark">
@@ -15,21 +14,6 @@ const Sidebar = () => {
           Inventory App
         </Link>
         <ul className="nav mx-auto">
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/dashboard">
-              Dashboard
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/user">
-              Users
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/order">
-              Orders
-            </Link>
-          </li>
           <li className="nav-item">
             <Link className="nav-link text-white" to="/home">
               Products
@@ -50,9 +34,28 @@ const Sidebar = () => {
               </li>
             </>
           ) : (
-            <div className="d-flex align-items-center">
-              <button className="btn btn-danger text-white" onClick={()=> dispatch(logout())}>Log Out</button>
-            </div>
+            <>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/dashboard">
+                  Dashboard
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/user">
+                  Users
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/order">
+                  Orders
+                </Link>
+              </li>
+              <div className="d-flex align-items-center">
+                <button className="btn btn-danger text-white" onClick={() => dispatch(logout())}>
+                  Log Out
+                </button>
+              </div>
+            </>
           )}
         </ul>
       </div>
@@ -60,4 +63,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Navbar;

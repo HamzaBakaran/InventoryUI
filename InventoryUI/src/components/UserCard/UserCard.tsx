@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { UserType } from '../../utils/types'
 
 type Props = {
