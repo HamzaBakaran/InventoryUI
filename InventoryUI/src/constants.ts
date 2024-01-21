@@ -245,5 +245,5 @@ export const productsList: Product[] = [
       total: 40
     },
   ]
-  export const BASE_URL = 'http://localhost:6543/api'
+  export const BASE_URL = 'https://web-engineering-inventory.onrender.com/api'
   
