@@ -1,24 +1,40 @@
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes } from "react-router-dom"
-import Sidebar from './components/Sidebar'
-import { Home, Login,NotFound,User } from './pages'
+import Navbar from './components/Navbar/Navbar';
+import { Home, Login,NotFound,Order,User,Registration } from './pages'
 import Dashboard from "./pages/Dashboard"
-//import Order from "./pages/Order"
+import parseJwt from './utils/parseJwt';
+import ProtectedRoute from './utils/ProtectedRoute';
+import ProtectedRouteAdmin from './utils/ProtectedRouteAdmin';
+
+
+
 
 
 function App() {
+  console.log(parseJwt(localStorage.getItem('userToken')!));
 
 
   return (
     <>
-    <Sidebar/>
+    <Navbar/>
     <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Home />} /> {/* Home page/product page */}
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/register" element={<Registration />} />
+        <Route element={<ProtectedRoute />}>
         <Route path="/user" element={<User />} />
+        <Route path="/order" element={<Order />} />
+        </Route>
+        <Route element={<ProtectedRouteAdmin />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        
         <Route path="*" element={<NotFound />} />
     </Routes>
+    <ToastContainer />
     </>
   )
 }

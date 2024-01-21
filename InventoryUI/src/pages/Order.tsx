@@ -1,12 +1,12 @@
-/*
-import React from 'react'
-import OrderTable from '../components/OrderTable'
 
-const Order = () => {
-  return (
-    <OrderTable />
-  )
-}
+import OrderDetails from '../components/OrderDetails';
+import { orderItems } from '../constants';
+import { OrderType } from '../utils/types';
+import parseJwt from '../utils/parseJwt';
 
-export default Order
-*/
+const OrdersPage = () => {
+
+  return <OrderDetails  />;
+};
+
+export default OrdersPage;

@@ -1,4 +1,4 @@
-import {Product, UserType} from './utils/types';
+import {OrderType, Product, UserType} from './utils/types';
 import {Dashboard} from './utils/types';
 //import {Order} from './utils/types';
 //import {ProductItem} from './utils/types';
@@ -203,8 +203,8 @@ export const productsList: Product[] = [
     userName: "h.b"
   }
   ]
-  /*
-  export const orderItems: Order[] = [
+  
+  export const orderItems: OrderType[] = [
   
     {
       id: "65760418f1ce411dbd2e85c6",
@@ -225,5 +225,25 @@ export const productsList: Product[] = [
       ],
       total: 40
     },
+    {
+      id: "65760418f1ce411dbd2e85c6",
+      orderDate: "Sun Dec 10 19:31:52 CET 2023",
+      products: [
+        {
+          productName: "ORANGE GARMIN FENIX 5 / 6 / 7 / PRO / EPIX 2 NARUKVICA 22mm",
+          quantity: 1,
+          price: 20,
+          subtotal: 20
+        },
+        {
+          productName: "GREEN GARMIN FENIX 5 / 6 / 7 / PRO / EPIX 2 NARUKVICA 22mm",
+          quantity: 1,
+          price: 20,
+          subtotal: 20
+        }
+      ],
+      total: 40
+    },
   ]
-  */
+  export const BASE_URL = 'http://localhost:6543/api'
+  
